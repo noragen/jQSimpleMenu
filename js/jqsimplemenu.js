@@ -6,7 +6,7 @@
 	        mouse_is_inside=false; 
 	    });
 			return this.each(function() {
-					//debugger;
+					debugger;
 					// add class .drop-down to all of the menus
 					// having drop-down items
 					var menu = $(this);
@@ -27,9 +27,6 @@
 						// animation
 						isTopLevel = $(this).parent().attr('class') === 'menu';
 						if (isTopLevel) {clearTimeout(timeoutInterval);
-							$(this).bind("mouseenter");
-                            $(this).bind("mouseleave");
-                            $(this).bind("click");
 							var w = $(this).outerWidth();
 							// if
 							// ($(this).hasClass('pull-down'))
