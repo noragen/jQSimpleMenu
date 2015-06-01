@@ -1,8 +1,14 @@
 (function($) {
 	$.fn.extend({jqsimplemenu : function() {
+	    $('.form_content').hover(function(){ 
+	        mouse_is_inside=true; 
+	    }, function(){ 
+	        mouse_is_inside=false; 
+	    });
 			return this.each(function() {
-					debugger;
-					// add class .drop-down to all of the menus having drop-down items
+					//debugger;
+					// add class .drop-down to all of the menus
+					// having drop-down items
 					var menu = $(this);
 					var timeoutInterval;
 					if (!menu.hasClass('menu'))
@@ -11,19 +17,23 @@
 						if ($(this).find("ul:first").length > 0)
 							$(this).addClass('pull-down');
 					});
-
 					$("> li ul li ul", menu).each(function() {
 						$(this).parent().addClass('right-menu');
 					});
 					$("li", menu).click(function(e) {
 						e.stopPropagation();
 						var isTopLevel = false;
-						// if its top level then add animation
+						// if its top level then add
+						// animation
 						isTopLevel = $(this).parent().attr('class') === 'menu';
-						if (isTopLevel) {
-							clearTimeout(timeoutInterval);
+						if (isTopLevel) {clearTimeout(timeoutInterval);
+							$(this).bind("mouseenter");
+                            $(this).bind("mouseleave");
+                            $(this).bind("click");
 							var w = $(this).outerWidth();
-							// if ($(this).hasClass('pull-down')) w += 10;
+							// if
+							// ($(this).hasClass('pull-down'))
+							// w += 10;
 							var h = $(this).outerHeight();
 							var box = $('<div/>').addClass('box');
 							$('> li', menu).removeClass('selected');
@@ -38,9 +48,7 @@
 											box.parent().find('ul:first').css('display','block').css('top',box.height()).stop(true,false).slideDown(100);
 										});
 									}, 10);
-								} 
-								else {
-
+								} else {
 									timeoutInterval = setTimeout(function() {
 										box.stop(true,false).animate({height : '+=0'},0,function() {
 											box.parent().find('ul:first').css('display','block').css('top',box.height()).stop(true,false).slideDown(100);
@@ -52,7 +60,8 @@
 					});
 					$("li", menu).mouseenter(function() {
 						var isTopLevel = false;
-						// if its top level then add animation
+						// if its top level then add
+						// animation
 						isTopLevel = $(this).parent().attr('class') === 'menu';
 						if (!isTopLevel) {
 							thisInstance = this;
@@ -72,22 +81,20 @@
 						}
 						$(this).find('ul').slideUp(100, function() {$(this).css('display', 'none');										});
 					});
-
-					$('> li > ul li a', menu).hover(function() {
+					$('> li > ul li a', menu).hover(
+							function() {
 								$(this).parent().addClass('menu-item-selected');
-					}, function() {
-
+							},
+							function() {
 								$(this).parent().removeClass('menu-item-selected');
 							});
 
 					$(menu).parents().click(
 						function(e) {
-							$( menu ).trigger( "focusout" );
+							$(menu).find('ul').slideUp(100, function() {$(this).css('display', 'none');});
 						}
 					);
-					$(menu).focusout(function(e) {
-						$(menu).find('ul').slideUp(100, function() {$(this).css('display', 'none');});
-					});
+
 				});
 			}
 		});
