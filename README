@@ -1,3 +1,7 @@
+This is a modified version of jQSimpleMenu, it opens on click and does not close on Mouse out, but on click of parent background.
+It makes the navigation easier and is more barrier free.
+
+Forked from:
 For complete documentation please visit http://www.egrappler.com/multi-level-hierarchical-jquery-menu-jqsimplemenu/
 
 or 
